@@ -21,11 +21,11 @@ class Presensi extends Model
 
     public function jadwal()
     {
-        return $this->hasOne(Jadwal::class);
+        return $this->hasMany(Jadwal::class);
     }
 
     public function dosen()
     {
-        return $this->hasOne(Dosen::class);
+        return $this->hasMany(Dosen::class);
     }
 }
