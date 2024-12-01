@@ -18,4 +18,14 @@ php artisan migrate --seed
 
 ## Testing
 
+Belum -10 menit
 ![WhatsApp Image 2024-12-01 at 15 51 31 (2)](https://github.com/user-attachments/assets/2a73a4a7-4887-46cf-9d4b-017d5fb00e20)
+
+Presensi Masuk Berhasil
+![WhatsApp Image 2024-12-01 at 15 51 31 (1)](https://github.com/user-attachments/assets/335dbe57-14f7-4e76-a13e-d97d640d1216)
+
+Presensi Pulang Berhasil
+![WhatsApp Image 2024-12-01 at 15 51 31](https://github.com/user-attachments/assets/45b275ec-4852-48f0-858f-4e8268c2f6fa)
+
+Perkuliahan +10 menit
+![WhatsApp Image 2024-12-01 at 15 51 32](https://github.com/user-attachments/assets/3d5bed27-8853-404a-a692-7cb7061cdcf0)
