@@ -13,6 +13,7 @@ class DashboardController extends Controller
     public function index(){
         $dosenId = Auth::guard('dosen')->id();
 
+        $dosen = Dosen::where('id', $dosenId)->first();
         $totalMengajar = Jadwal::where('dosen_id', $dosenId)->count();
         $jmlPresensi = Presensi::where('dosen_id', $dosenId)->count();
         // $listMakul = Jadwal::with('matakuliah')->where('dosen_id', $dosenId)->get();
@@ -22,6 +23,6 @@ class DashboardController extends Controller
                     ->get();
         // return $listMakul;
 
-        return view('dashboard.index', compact('totalMengajar','jmlPresensi','listMakul'));
+        return view('dashboard.index', compact('dosen','totalMengajar','jmlPresensi','listMakul'));
     }
 }

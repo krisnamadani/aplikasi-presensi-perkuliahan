@@ -13,6 +13,12 @@
           <a class="nav-link" href="/presensi">Presensi</a>
         </li>
       </ul>
+      <span class="navbar-text ms-auto">
+        <form action="/logout" method="POST" style="display: inline;">
+          @csrf
+          <a href="javascript:void(0)" onclick="this.closest('form').submit()" class="nav-link" style="font-size: 16px; text-decoration: none;">Logout</a>
+        </form>
+      </span>
     </div>
   </div>
 </nav>
