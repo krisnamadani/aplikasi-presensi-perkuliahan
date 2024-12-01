@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Dosen;
 use App\Models\Jadwal;
 use App\Models\Matakuliah;
+use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
@@ -18,28 +19,41 @@ class JadwalSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        // mengambil id dari tabel dosen dan matakuliah
-        $dosenIds = Dosen::pluck('id')->toArray();
-        $matakuliahIds = Matakuliah::pluck('id')->toArray();
+        // Ambil semua mata kuliah dan dosen
+        $matakuliah = Matakuliah::all();
+        $dosen = Dosen::all();
 
-        // Memastikan tabel dosen dan matakuliah tidak kosong
-        if (empty($dosenIds) || empty($matakuliahIds)) {
-            $this->command->error('Tabel dosen atau matakuliah kosong. Tambahkan data terlebih dahulu.');
-            return;
-        }
-
-        Jadwal::query()->delete();
-
-        // Buat data dummy untuk tabel jadwal
+        // Batasi data menjadi 10 jadwal
         foreach (range(1, 10) as $index) {
+            // Pilih mata kuliah dan dosen secara acak
+            $mk = $matakuliah->random();
+            $dsn = $dosen->random();
+
+            // Tentukan durasi berdasarkan jenis mata kuliah
+            if ($mk->jenis == 'Teori') {
+                $durasi = 55; // 55 menit untuk teori
+            } elseif ($mk->jenis == 'Praktikum') {
+                $durasi = 120; // 120 menit untuk praktikum
+            } else {
+                $durasi = 60; // Default durasi jika jenis tidak ditemukan
+            }
+
+            // Tentukan waktu mulai secara acak (misalnya dari jam 7 pagi hingga 3 sore)
+            $jamMulai = Carbon::createFromFormat('Y-m-d H:i:s', $faker->dateTimeThisMonth('now', 'Asia/Jakarta')->format('Y-m-d H:i:s'))->setTime(
+                rand(7, 14), // Jam mulai acak antara jam 7 sampai jam 14
+                $faker->numberBetween(0, 59) // Menit mulai acak
+            );
+
+            // Hitung waktu selesai berdasarkan durasi
+            $jamSelesai = $jamMulai->copy()->addMinutes($durasi); // Menambahkan durasi ke jam mulai
+
+            // Simpan data jadwal
             Jadwal::create([
-                'dosen_id' => $faker->randomElement($dosenIds), // Ambil ID dosen secara acak
-                'matakuliah_id' => $faker->randomElement($matakuliahIds), // Ambil ID matakuliah secara acak
+                'dosen_id' => $dsn->id,
+                'matakuliah_id' => $mk->id,
                 'hari' => $faker->randomElement(['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat']),
-                'jam_mulai' => $faker->time('H:i:s', '08:00:00'), // Jam mulai
-                'jam_selesai' => $faker->time('H:i:s', '17:00:00'), // Jam selesai
-                'created_at' => now(),
-                'updated_at' => now(),
+                'jam_mulai' => $jamMulai->format('H:i'), // Format jam mulai
+                'jam_selesai' => $jamSelesai->format('H:i'), // Format jam selesai
             ]);
         }
     }
