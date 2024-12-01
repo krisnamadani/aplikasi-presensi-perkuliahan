@@ -22,10 +22,10 @@ class CheckPresensi
     {
         $dosenId = Auth::guard('dosen')->id();
 
-        $hariIni = Carbon::now()->locale('id');
-        $hariIni->settings(['formatFunction' => 'translatedFormat']);
-        $hariIniIndonesia = $hariIni->translatedFormat('l');
-        // $hariIniIndonesia = 'Rabu';
+        // $hariIni = Carbon::now()->locale('id');
+        // $hariIni->settings(['formatFunction' => 'translatedFormat']);
+        // $hariIniIndonesia = $hariIni->translatedFormat('l');
+        $hariIniIndonesia = 'Rabu';
 
         $jadwals = Jadwal::where('hari', $hariIniIndonesia)
             ->where('dosen_id', $dosenId)
