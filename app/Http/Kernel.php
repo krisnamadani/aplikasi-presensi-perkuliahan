@@ -65,6 +65,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'auth.dosen' => \App\Http\Middleware\AuthenticateDosen::class,
-        'check.presensi' => \App\Http\Middleware\CheckPresensiTime::class,
+        'check.presensi' => \App\Http\Middleware\CheckPresensi::class,
+        'check.presensi.time' => \App\Http\Middleware\CheckPresensiTime::class,
     ];
 }

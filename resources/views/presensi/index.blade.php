@@ -31,7 +31,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($jadwals as $jadwal)
+                @foreach (request()->jadwals as $jadwal)
                     <tr>
                         <th scope="row">{{ $loop->iteration }}</th>
                         <td>{{ $jadwal->matakuliah->nama }}</td>

@@ -30,15 +30,12 @@ Route::middleware('auth.dosen')->group(function () {
     Route::controller(DashboardController::class)->group(function () {
         Route::get('dashboard', 'index')->name('dashboard');
     });
+
+    Route::get('/presensi', [App\Http\Controllers\PresensiController::class, 'index'])->name('presensi')->middleware('check.presensi');
+    Route::get('/presensi_masuk', [App\Http\Controllers\PresensiController::class, 'presensi_masuk'])->name('presensi_masuk')->middleware('check.presensi.time');
+    Route::get('/presensi_pulang', [App\Http\Controllers\PresensiController::class, 'presensi_pulang'])->name('presensi_pulang')->middleware('check.presensi.time');
 });
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard.index');
 // });
-
-Route::get('/presensi', function () {
-    return view('presensi.index');
-});
-Route::get('/presensi', [App\Http\Controllers\PresensiController::class, 'index']);
-Route::get('/presensi_masuk', [App\Http\Controllers\PresensiController::class, 'presensi_masuk'])->name('presensi_masuk')->middleware('check.presensi');
-Route::get('/presensi_pulang', [App\Http\Controllers\PresensiController::class, 'presensi_pulang'])->name('presensi_pulang')->middleware('check.presensi');
