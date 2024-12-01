@@ -21,13 +21,11 @@ class Jadwal extends Model
 
     public function dosen()
     {
-        return $this->hasMany(Dosen::class);
+        return $this->belongsTo(Dosen::class);
     }
 
     public function matakuliah()
     {
-        return $this->hasMany(Matakuliah::class);
+        return $this->belongsTo(Matakuliah::class);
     }
-
-
 }
