@@ -7,6 +7,9 @@
     @include('layouts.navbar')
 
     <div class="row mt-4">
+
+        <h4 class="mb-2">{{ $dosen->nama }}</h4>
+
         <div class="col-6">
             <div class="alert alert-primary" role="alert">
                 Jadwal Mengajar : {{ $totalMengajar }}
