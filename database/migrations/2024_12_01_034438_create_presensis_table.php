@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('jadwal_id')->constrained('jadwals');
             $table->foreignId('dosen_id')->constrained('dosens');
-            $table->timestamp('waktu_presensi');
+            $table->timestamp('waktu_presensi_mulai')->nullable();
+            $table->timestamp('waktu_presensi_selesai')->nullable();
             $table->timestamps();
         });
     }
