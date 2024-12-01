@@ -39,7 +39,7 @@
                         <td>{{ $jadwal->jam_selesai }}</td>
                         <td>
                             <a href="{{ route('presensi_masuk', ['jadwal_id' => $jadwal->id]) }}"
-                                class="btn btn-primary @if ($jadwal->jam_mulai_presensi) disabled @endif">Presensi
+                                class="btn btn-primary @if ($jadwal->jam_mulai_presensi) @else disabled @endif">Presensi
                                 Masuk</a>
                             <a href="{{ route('presensi_pulang', ['jadwal_id' => $jadwal->id]) }}"
                                 class="btn btn-danger @if ($jadwal->jam_selesai_presensi) @else disabled @endif">Presensi

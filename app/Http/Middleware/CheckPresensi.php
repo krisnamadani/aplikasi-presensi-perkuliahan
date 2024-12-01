@@ -35,12 +35,12 @@ class CheckPresensi
             $jadwal->jam_sekarang = Carbon::now()->format('H:i:s');
 
             $jadwal->jam_mulai_10 = Carbon::parse($jadwal->jam_mulai)->subMinutes(10)->format('H:i:s');
-            $jadwal->jam_mulai_presensi = $jadwal->jam_sekarang < $jadwal->jam_mulai_10;
+            $jadwal->jam_mulai_presensi = $jadwal->jam_sekarang >= $jadwal->jam_mulai_10;
 
             $jadwal->jam_selesai_min_10 = Carbon::parse($jadwal->jam_selesai)->subMinutes(10)->format('H:i:s');
             $jadwal->jam_selesai_plus_10 = Carbon::parse($jadwal->jam_selesai)->addMinutes(10)->format('H:i:s');
             $jadwal->sudah_presensi_mulai = Presensi::where('jadwal_id', $jadwal->id)->whereNotNull('waktu_presensi_mulai')->exists();
-            $jadwal->jam_selesai_presensi = $jadwal->jam_sekarang > $jadwal->jam_selesai_min_10 && $jadwal->jam_sekarang < $jadwal->jam_selesai_plus_10 && $jadwal->sudah_presensi_mulai;
+            $jadwal->jam_selesai_presensi = $jadwal->jam_sekarang >= $jadwal->jam_selesai_min_10 && $jadwal->jam_sekarang <= $jadwal->jam_selesai_plus_10 && $jadwal->sudah_presensi_mulai;
         });
 
         $request->merge([

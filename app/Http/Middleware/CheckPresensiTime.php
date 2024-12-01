@@ -22,11 +22,11 @@ class CheckPresensiTime
         $jam_sekarang = Carbon::now()->format('H:i:s');
 
         $jam_mulai_10 = Carbon::parse($jadwal->jam_mulai)->subMinutes(10)->format('H:i:s');
-        $jam_mulai_presensi = $jam_sekarang > $jam_mulai_10;
+        $jam_mulai_presensi = $jam_sekarang >= $jam_mulai_10;
 
         $jam_selesai_min_10 = Carbon::parse($jadwal->jam_selesai)->subMinutes(10)->format('H:i:s');
         $jam_selesai_plus_10 = Carbon::parse($jadwal->jam_selesai)->addMinutes(10)->format('H:i:s');
-        $jam_selesai_presensi = $jadwal->jam_sekarang > $jam_selesai_min_10 && $jam_sekarang < $jam_selesai_plus_10;
+        $jam_selesai_presensi = $jadwal->jam_sekarang >= $jam_selesai_min_10 && $jam_sekarang <= $jam_selesai_plus_10;
 
         if ($jam_mulai_presensi || $jam_selesai_presensi) {
             return $next($request);
