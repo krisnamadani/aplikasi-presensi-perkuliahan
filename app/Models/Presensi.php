@@ -16,7 +16,7 @@ class Presensi extends Model
      */
 
     protected $table = 'presensis';
-    protected $fillable = ['id', 'jadwal_id', 'dosen_id', 'waktu_presensi'];
+    protected $fillable = ['id', 'jadwal_id', 'dosen_id', 'waktu_presensi_mulai', 'waktu_presensi_selesai'];
     public $timestamps = true;
 
     public function jadwal()
